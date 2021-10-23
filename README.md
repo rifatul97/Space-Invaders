@@ -7,6 +7,7 @@ Classic Space Invaders arcade game implemented in Java without the use of game e
 * The game increases difficulty as the player progresses to next waves - the invaders' movement speed increases. <br />  
 
 ## Features to be implemented:
+* Make uses of latest Java features and mix with Kotlin
 * Time system. <br />  
 * Tracking playing scores. <br />  
 * Sound. <br />  
