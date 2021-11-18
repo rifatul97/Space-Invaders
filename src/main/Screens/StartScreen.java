@@ -3,73 +3,89 @@ package main.Screens;
 import main.Events.InputHandler;
 import main.Events.MouseHandler;
 import main.Events.Renderer;
-import main.constants.*;
-import main.constants.Menu;
-import main.gdx.Image;
 import main.GameContainer;
+import main.constants.MenuItem;
+import main.constants.*;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class StartScreen implements Screen {
 
-    ArrayList<String> menuItems;
-    GameContainer gc;
-    Menu.MAIN selectedItem = Menu.MAIN.Start;
-    BufferedImage titlelogo = Resource.getImage("Logo");
+    private final ArrayList<String> menuItems = new MenuItems().getMenuItemAsList();
+    private final GameContainer gc;
+    private final BufferedImage gameLogo = Resource.getImage("Logo");
+    private boolean DownPressed;
+    private boolean UpPressed;
+    private MenuItem currentSelected;
 
     public StartScreen(GameContainer gc) throws IOException {
         this.gc = gc;
-        menuItems = new ArrayList<>();
-        menuItems.add("Start Game");
-        menuItems.add("LeaderBoards");
-        menuItems.add("Exit");
+        currentSelected = new MenuItems().getMenuItems();
     }
 
     @Override
-    public void update() {}
+    public void update() {
+    }
 
     @Override
-    public void draw(Renderer renderer) {
+    public void draw(Renderer r) {
+        ///gc.getWindow().getG().setFont();
         int y = 250;
-        for (String item : menuItems)
-        {
+        for (String item : menuItems) {
             gc.getWindow().getG().setColor(Color.white);
-            if ((item.startsWith(selectedItem.name()))) {
+            if ((item.startsWith(currentSelected.getName()))) {
                 gc.getWindow().getG().setColor(Color.green);
             }
             gc.getWindow().getG().drawString(item, 300, y);
 
-            y+=20;
+            y += 30;
         }
-        gc.getWindow().getG().drawImage(titlelogo, 242, 10, null);
+        gc.getWindow().getG().drawImage(gameLogo, 242, 10, null);
+        gc.getWindow().getG().setColor(Color.LIGHT_GRAY);
+        gc.getWindow().getG().drawString("Programmed By Rifatul Karim", 250, 575);
+        gc.getWindow().getG().setColor(Color.WHITE);
     }
+
 
     @Override
     public void handleInput(InputHandler input) {
-        if (input.enter.isPressed() && selectedItem == Menu.MAIN.Exit) {
-            gc.stop();
-        }
 
-        else if (input.enter.isPressed() && selectedItem == Menu.MAIN.Start) {
-            gc.setGameState(GameState.RUNNING);
-
+        if (input.down.isPressed()) {
+            if (!DownPressed) {
+                DownPressed = true;
+                Resource.getSound("navsound").play();
+                currentSelected = currentSelected.getNext();
+            }
+        } else {
+            DownPressed = false;
         }
 
         if (input.up.isPressed()) {
-            if (selectedItem == Menu.MAIN.Exit) {
-                selectedItem = Menu.MAIN.Start;
+            if (!UpPressed) {
+                UpPressed = true;
+                Resource.getSound("navsound").play();
+                currentSelected = currentSelected.getPrev();
             }
+        } else {
+            UpPressed = false;
         }
 
-        if (input.down.isPressed()) {
-            if (selectedItem == Menu.MAIN.Start) {
-                selectedItem = Menu.MAIN.Exit;
+        if (input.enter.isPressed()) {
+            switch (currentSelected.getName()) {
+                case "Start Game" -> {
+                    gc.setGameState(GameState.RUNNING);
+                }
+                case "Scoreboard" -> {
+                    gc.setGameState(GameState.SCOREBOARD);
+                }
+                case "Exit Game" -> {
+                    gc.stop();
+                }
             }
+
         }
     }
 

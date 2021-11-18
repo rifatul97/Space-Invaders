@@ -21,20 +21,19 @@ public class AlienController {
     public Direction currentDirection;
     public Direction previousDirection;
     public boolean changeDirection;
-    private Invader.Character[] invaders;
+    private final Invader.Character[] invaders = new Invader.Character[]{Invader.Character.CRAB, Invader.Character.CRAB, Invader.Character.FISH, Invader.Character.OCTOPUS};
 
     public AlienController (GameScreen game)
     {
         this.game = game;
+        resetAlienPositions();
+    }
+
+    public void resetAlienPositions() {
         changeDirection = false;
         currentDirection = Direction.LEFT;
         previousDirection = Direction.RIGHT;
-        invaders = new Invader.Character[]{Invader.Character.CRAB, Invader.Character.CRAB, Invader.Character.FISH, Invader.Character.OCTOPUS};
-        game.alienBombs = new ArrayList<>();
-        game.numOfEnemies = game.aliens.size();
-    }
 
-    public void initAliens(List<Alien> aliens) {
         int y = 50;
         int index = 0;
         for(int i=0; i<4; i++)
@@ -44,12 +43,15 @@ public class AlienController {
             {
                 Alien alien = new Alien(invaders[index], x, y);
                 x += 25;
-                aliens.add(alien);
+                game.aliens.add(alien);
+                game.numOfEnemies++;
             }
             y += 20;
             index++;
         }
+
     }
+
 
     public void initUFOShip (GameScreen game)
     {
@@ -90,7 +92,7 @@ public class AlienController {
 
     private void checkIfAliensCollideWalls(GameScreen game) {
 
-        if(changeDirection == true) {
+        if(changeDirection) {
             if (previousDirection == Direction.LEFT) currentDirection = Direction.RIGHT;
             else currentDirection = Direction.LEFT;
             changeDirection = false;
@@ -146,13 +148,13 @@ public class AlienController {
                         Direction shotdirection = shoot%2 == 0 ? Direction.BOTTOM_LEFT : Direction.BOTTOM_RIGHT;
                         Projectile alienBomb = new Projectile(new Image("thunder"), shotdirection, alien.getPosX(), alien.getPosY(), 2, 20);
                         alienBomb.setCurrentDirection(shotdirection);
-                        game.alienBombs.add(alienBomb);
+                        game.bombs.add(alienBomb);
                     } else if (shoot <= game.wave + 20) {
                         Projectile alienBomb = new Projectile(new Image("bomb"), Direction.DOWN, alien.getPosX(), alien.getPosY(), 1, 30);
-                        game.alienBombs.add(alienBomb);
+                        game.bombs.add(alienBomb);
                     } else if (shoot <= game.wave + 50){
                         Projectile alienBomb = new Projectile(new Image("shot"), Direction.DOWN, alien.getPosX(), alien.getPosY(), 2, 15);
-                        game.alienBombs.add(alienBomb);
+                        game.bombs.add(alienBomb);
                     }
                 }
             }

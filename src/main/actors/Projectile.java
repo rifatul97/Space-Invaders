@@ -10,14 +10,14 @@ import main.GameContainer;
 
 public class Projectile extends GameObject {
 
-    public int speed;
+    public float speed;
     public int power;
     public Direction currentDirection;
     public Image image;
 
     //player's projectile.
     public Projectile (int x, int y) {
-        this.posX = x;
+        this.posX = x + 7;
         this.posY = y;
         this.image = new Image("bomb");
         this.power = 25;
@@ -28,6 +28,25 @@ public class Projectile extends GameObject {
         this.currentDirection = Direction.UP;
     }
 
+    public Projectile (Image p, Direction direction, int x, int y)
+    {
+        this.posX = x;
+        this.posY = y;
+        this.image = p;
+        this.setHeight(image.getH());
+        this.setWidth(image.getW());
+        this.currentDirection = direction;
+    }
+
+    public Projectile (Image p, Direction direction, GameObject object)
+    {
+        this.posX = object.posX;
+        this.posY = object.posY;
+        this.image = p;
+        this.setHeight(image.getH());
+        this.setWidth(image.getW());
+        this.currentDirection = direction;
+    }
 
     public Projectile (Image p, Direction direction, int x, int y, int speed, int power)
     {

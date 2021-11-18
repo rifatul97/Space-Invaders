@@ -2,5 +2,5 @@ package main.constants;
 
 public enum GameState
 {
-    START, RUNNING, PAUSE
+    START, RUNNING, PAUSE, SCOREBOARD
 }

@@ -2,17 +2,15 @@ package main.actors;
 
 import main.Events.Renderer;
 import main.Screens.GameScreen;
-import main.constants.Direction;
-import main.constants.GameConstants;
-import main.constants.GameObject;
+import main.constants.*;
 import main.gdx.Image;
 import main.GameContainer;
 
 public class Player extends GameObject {
-    public Projectile playerProjectile;
     public int shield;
     public int score;
-    public int totalshield;
+    private long lastFire = System.currentTimeMillis();
+    public double firingInterval = 0.33;
 
     public Player (int posX, int posY)
     {
@@ -22,29 +20,21 @@ public class Player extends GameObject {
         this.setHeight(image.getH());
         this.setWidth(image.getW());
         currentDirection = Direction.STANDBY;
-        playerProjectile = null;
-        totalshield = 100;
-        shield = 100;
+        shield = 1;
         score = 0;
     }
 
-    public boolean isShotVisible () {
-        return this.playerProjectile != null;
-    }
 
-    public void setShot () {
-        if ( playerProjectile == null )
-        {
-            System.out.println("shot set!");
-            playerProjectile = new Projectile(this.getPosX()+7, this.getPosY());
-            playerProjectile.setCurrentDirection(Direction.UP);
+    public boolean createShot() {
+        if ((System.currentTimeMillis() - lastFire)/1000 < firingInterval) {
+            return false;
         }
+        lastFire = System.currentTimeMillis();
+        return true;
     }
 
-    public void destroyShot ()
-    {
-        System.out.println("shot destroyed at " + playerProjectile.getPosY());
-        playerProjectile = null;
+    public void calculateScore(Alien alien) {
+        this.score += 100;
     }
 
     @Override

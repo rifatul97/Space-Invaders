@@ -41,7 +41,7 @@ public class Window {
         g = bs.getDrawGraphics();
         bs.show();
 
-        Font font = Resource.getFont("arcadeclassic");//.deriveFont(48f);//.deriveFont(48f);
+        Font font = Resource.getFont("arcadeclassic");//.deriveFont(96f);//.deriveFont(48f);
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         //register the font
         Font biggerFont = font.deriveFont(21f);

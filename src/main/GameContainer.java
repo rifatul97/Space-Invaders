@@ -4,6 +4,7 @@ import main.Events.InputHandler;
 import main.Events.Renderer;
 import main.Screens.GameScreen;
 import main.Screens.PauseScreen;
+import main.Screens.ScoreboardScreen;
 import main.Screens.StartScreen;
 import main.constants.GameConstants;
 import main.constants.GameState;
@@ -43,6 +44,7 @@ public class GameContainer implements Runnable{
         input = new InputHandler(this);
         screens.put(GameState.START, new StartScreen(this));
         screens.put(GameState.PAUSE, new PauseScreen(this));
+        screens.put(GameState.SCOREBOARD, new ScoreboardScreen(this));
         screens.put(GameState.RUNNING, new GameScreen(this));
         thread = new Thread(this);
         running = true;
@@ -90,7 +92,7 @@ public class GameContainer implements Runnable{
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
-                    System.out.println("FPS: " + fps);
+                    //System.out.println("FPS: " + fps);
                     gameFps = fps;
                 }
             }

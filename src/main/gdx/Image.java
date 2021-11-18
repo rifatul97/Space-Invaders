@@ -16,7 +16,6 @@ public class Image {
     {
         BufferedImage image = null;
 
-        //image = ImageIO.read(Image.class.getResourceAsStream(path));
         image = Resource.getImage(name);
 
         setW(image.getWidth());

@@ -1,5 +1,7 @@
 package main.constants;
 
+import java.util.ArrayList;
+
 public interface GameConstants {
 
     String title = "Space Invaders 2020";

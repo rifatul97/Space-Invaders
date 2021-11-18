@@ -58,9 +58,8 @@ public class Renderer {
 
     public void setPixel(int x, int y, int value) {
 
-        if( (x < 0 || x >= pW || y < 0 || y >= pH ) )//|| value == 0xffff00ff) )
+        if( (x < 0 || x >= pW || y < 0 || y >= pH || value == 0xffff00ff) )
         {
-            //System.out.println("returned");
             return;
         }
 

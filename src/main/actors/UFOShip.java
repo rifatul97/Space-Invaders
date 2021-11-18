@@ -62,11 +62,6 @@ public class UFOShip extends GameObject{
         System.out.println("UFOShip shoots at " + this.getPosX());
     }
 
-    public void removebomb ()
-    {
-        this.bomb = null;
-    }
-
     public void render (GameContainer gc, Renderer r)
     {
         r.drawImage(image, this.getPosX(), this.getPosY());

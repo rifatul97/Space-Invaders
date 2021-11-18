@@ -1,10 +1,11 @@
 package main.constants;
 
 import main.Events.Renderer;
+import main.GameContainer;
 import main.Screens.GameScreen;
+import main.actors.Alien;
 import main.gdx.Image;
 import main.gdx.ImageTile;
-import main.GameContainer;
 
 import java.awt.*;
 
@@ -16,6 +17,8 @@ public abstract class GameObject {
     public boolean exist = true;
     public Image image;
     public ImageTile imageTile;
+    protected Direction currentDirection;
+    public float moveSpeed;
 
     public Direction getCurrentDirection() {
         return currentDirection;
@@ -25,47 +28,40 @@ public abstract class GameObject {
         this.currentDirection = currentDirection;
     }
 
-    protected Direction currentDirection;
-
     public abstract void update(GameScreen game, float dt);
+
     public abstract void render(GameContainer gc, Renderer r);
 
     public boolean collisionWithWall(Direction d) {
         String direction = d.toString();
-        switch (direction)
-        {
+        switch (direction) {
             // check if the object is colliding with left wall
             case "LEFT":
-                if (this.getPosX() <= 1) {
-                    return true;
-                }
-                return false;
+                return this.getPosX() <= 1;
             case "RIGHT":
-                if (this.getPosX() >= 382) {
-                    return true;
-                }
-                return false;
+                return this.getPosX() >= 382;
+            case "UP":
+                return this.getPosY() <= 5;
+            case "DOWN":
+                return this.posY >= 288;
         }
         return false;
     }
 
-    public boolean collideWithGround () { return this.posY >= 288; }
-
-
-    public boolean collisionWithOtherObject (GameObject other)
-    {
-        //System.out.println("shotX = " + this.posX + " alienX= " + other.posX + "\nshotY= " + this.posY + " alienY= " + other.posY);
+    public boolean collisionWithOtherObject(GameObject other) {
         if (this.getPosX() >= (other.getPosX())
                 && this.getPosX() <= (other.getPosX() + other.getWidth())
                 && this.getPosY() >= (other.getPosY())
-                && this.getPosY() <= (other.getPosY() + other.getHeight())){
+                && this.getPosY() <= (other.getPosY() + other.getHeight())) {
+            System.out.println("shotX = " + this.posX + " alienX= " + other.posX + "\nshotY= " + this.posY + " alienY= " + other.posY);
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
-    public Rectangle getRectangle() { return new Rectangle(this.getPosX(), this.getPosY(), this.getWidth(), this.getHeight()); }
+
+    public Rectangle getRectangle() {
+        return new Rectangle(this.getPosX(), this.getPosY(), this.getWidth(), this.getHeight());
+    }
 
     public int getPosX() {
         return posX;
