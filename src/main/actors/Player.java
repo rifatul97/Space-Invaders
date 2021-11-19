@@ -10,7 +10,7 @@ public class Player extends GameObject {
     public int shield;
     public int score;
     private long lastFire = System.currentTimeMillis();
-    public double firingInterval = 0.25;
+    public double firingInterval = 0.10;
 
     public Player (int posX, int posY)
     {

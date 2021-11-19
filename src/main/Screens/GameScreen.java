@@ -37,7 +37,7 @@ public class GameScreen implements Screen {
         player = new Player(25, 284);
         score = player.score;
         shield = player.shield;
-        currentTimeRemaining = 30000;
+        currentTimeRemaining = 100000;
         initNewLevel();
         Resource.getSound("soundtrack").play();
         gameOver = false;
