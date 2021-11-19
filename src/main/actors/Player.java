@@ -10,7 +10,7 @@ public class Player extends GameObject {
     public int shield;
     public int score;
     private long lastFire = System.currentTimeMillis();
-    public double firingInterval = 0.33;
+    public double firingInterval = 0.25;
 
     public Player (int posX, int posY)
     {
@@ -20,7 +20,7 @@ public class Player extends GameObject {
         this.setHeight(image.getH());
         this.setWidth(image.getW());
         currentDirection = Direction.STANDBY;
-        shield = 1;
+        shield = 100;
         score = 0;
     }
 
