@@ -14,11 +14,11 @@ Classic Space Invaders arcade game implemented in Java without the use of a game
 * Arrow keys: Move the Player's ship to dodge enemies' fires.<br />
 * Space:  Fires Player's weapon.<br />
 * Enter:  Press to execute the menu option.<br />
+* p: Pause the in-game
 
-## Screenshots (Outdated):
-  <img src="https://user-images.githubusercontent.com/42017999/138564636-4451b11f-01b6-4aa6-ac43-31a7156bd995.png" width="480">
-  <img src="https://user-images.githubusercontent.com/42017999/138564651-971f0616-75ce-4553-9dd9-d551ebf30d6c.png" width="480">
-  <img src="https://user-images.githubusercontent.com/42017999/138564647-730dfefc-3d40-40bd-a19b-101035b39d1a.png" width="480">
+## Screenshots:
+![StartScreen](https://user-images.githubusercontent.com/42017999/142566641-9e79631e-6ff9-49bf-9473-4350ebdc6f98.png)
+![GameScreen](https://user-images.githubusercontent.com/42017999/142566649-2dfa2cbb-a62c-4cf7-8da6-3e13693388e4.png)
 
 ## References:
   TODO
